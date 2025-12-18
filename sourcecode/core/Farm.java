@@ -4,7 +4,7 @@ import utility.Point;
 import eventSystem.RandomEventManager;
 import java.util.ArrayList;
 import java.util.List;
-
+import exceptions.*;
 public class Farm {
     private FarmCell[][] grid;
     private int width;
@@ -27,12 +27,14 @@ public class Farm {
     }
     public FarmCell getCell(int x, int y){
         if(!isValidPosition(x,y)){
-            System.out.println("Invalid position");
-            return null;
+            throw new InvalidPositionException("Invalid farm position.");
         }
         return grid[y][x];
     }
     public FarmCell getCell(Point position){
+    	if (position == null) {
+    		throw new InvalidPositionException("Position cannot be null");
+    	}
         return getCell(position.getX(),position.getY());
     }
     public int getWidth() {
