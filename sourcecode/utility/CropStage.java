@@ -1,7 +1,7 @@
 package utility;
 public enum CropStage {
     SEED("Seed"),
-    SEEDLING("Seeding"),
+    SEEDLING("Seedling"),
     MATURE("Mature"),
     HARVESTABLE("Harvestable"),
     DEAD("Dead");

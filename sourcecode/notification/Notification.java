@@ -39,7 +39,7 @@ public class Notification {
     public String toString() {
         String readStatus = isRead ? " " : "[NEW!]";
 
-        return String.format("%s [Day %d] %s %s: %s",
+        return String.format("%s [Day %d] %s %s ",
                 readStatus,
                 gameDay,
                 type.getNotificationName(),

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class NotificationManager {
     private LinkedList<Notification> notifications;
-    private static final int HISTORY_LIMIT = 25;
+    private static final int HISTORY_LIMIT = 100;
     public NotificationManager(){
         this.notifications=new LinkedList<>();
     }

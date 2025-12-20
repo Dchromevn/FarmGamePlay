@@ -1,7 +1,8 @@
 package core;
 
 import utility.Point;
-import exceptions.CellOccupiedException;
+import exceptions.*;
+
 public class FarmCell {
     private Point position;
     private Crop crop;
@@ -17,13 +18,11 @@ public class FarmCell {
         	throw new CellOccupiedException("Cell "+ position +" is already occupied.");
 
         }
-        this.crop=crop;
-        
+        this.crop=crop; 
     }
     public Crop getCrop() {
         return crop;
     }
-//require for a crop here
     public Crop requireCrop() {
     	if (crop == null) {
     		throw new IllegalStateException("No crop at "+ position);
@@ -37,6 +36,7 @@ public class FarmCell {
         Crop removed = this.crop;
         this.crop = null;
 
+        System.out.println("Removed " + removed.getCropType().getCropName() + " from " + position);
         return removed;
     }
     public boolean isEmpty(){

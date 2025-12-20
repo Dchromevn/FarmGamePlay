@@ -3,6 +3,7 @@ package utility;
 import core.Crop;
 
 public class CropStatus {
+	private final String cropName;
     private final CropStage stage;
     private final int health;
     private final int waterLevel;
@@ -12,6 +13,7 @@ public class CropStatus {
     private final boolean needFertilizer;
     private final String statusMessage;
     public CropStatus(Crop crop) {
+    	this.cropName = crop.getCropType().getCropName();
         this.stage = crop.getCurrentStage();
         this.health = crop.getHealth();
         this.waterLevel = crop.getWaterLevel();
@@ -38,6 +40,7 @@ public class CropStatus {
             return "Growing healthy";
         }
     }
+    public String getCropName() {return cropName;}
     public CropStage getStage() { return stage; }
     public int getHealth() { return health; }
     public int getWaterLevel() { return waterLevel; }
@@ -49,8 +52,15 @@ public class CropStatus {
     @Override
     public String toString() {
         return String.format(
-                "Stage: %s\nHealth: %d%%\nWater: %d%%\nFertilizer: %d%%\nDays to harvest: %d\nStatus: %s",
-                stage.getDisplayStage(), health, waterLevel, fertilizerLevel, daysHarvest, statusMessage
+                "Crop: %s\nStage: %s\nHealth: %d%%\nWater: %d%%\nFertilizer: %d%%\nDays to harvest: %d\nStatus: %s",
+            
+                cropName, 
+                stage.getDisplayStage(), 
+                health, 
+                waterLevel, 
+                fertilizerLevel, 
+                daysHarvest, 
+                statusMessage
         );
     }
 }

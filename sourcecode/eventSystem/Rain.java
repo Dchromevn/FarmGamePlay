@@ -10,7 +10,7 @@ public class Rain extends GameEvent{
     }
     @Override
     public String triggerEvent(Farm farm){
-        int waterAmount=25;
+        int waterAmount=10;
         for (Crop crop: farm.getAllCrops()){
             if(!crop.isDead()){
                 crop.water(waterAmount);            }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="asset.FarmController">
+    <children>
+        <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@images/Background.png" />
+            </image>
+        </ImageView>
+
+        <Pane fx:id="farmPane" layoutX="50.0" layoutY="50.0" prefHeight="700.0" prefWidth="950.0" />
+
+        <Pane fx:id="uiLayerPane" mouseTransparent="true" prefHeight="800.0" prefWidth="1200.0" />
+
+        <Button fx:id="advanceDayButton" layoutX="1020.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleAdvanceDay" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);" text="Advance day">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+
+        <VBox alignment="CENTER" layoutX="1045.0" layoutY="120.0" prefHeight="600.0" prefWidth="110.0" spacing="15.0">
+            <children>
+                <Button fx:id="storeButton" mnemonicParsing="false" onAction="#handleStoreButton" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                    <graphic>
+                        <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/Store.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="waterButton" mnemonicParsing="false" onAction="#handleWaterButton" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                    <graphic>
+                        <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/Water_Pod.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="infoButton" mnemonicParsing="false" onAction="#handleInfoButton" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                    <graphic>
+                        <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/Notification.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="equipmentButton" mnemonicParsing="false" onAction="#handleEquipmentButton" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                    <graphic>
+                        <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/Inventory.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

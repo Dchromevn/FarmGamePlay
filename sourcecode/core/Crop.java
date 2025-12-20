@@ -13,8 +13,6 @@ public abstract class Crop extends Entity {
     protected int maxWaterLevel;
     protected int maxFertilizerLevel;
     protected final int MAX_HEALTH =100;
-    protected int waterPerDay;
-    protected int fertilizerPerDay;
     protected int basePrice;
     protected int []dayPerStage;
     protected int waterNeedThreshold;
@@ -23,18 +21,17 @@ public abstract class Crop extends Entity {
         super(id, position);
         this.cropType = cropType;
         this.currentStage=CropStage.SEED;
-        this.maxWaterLevel=50;
-        this.maxFertilizerLevel=50;
+        this.maxWaterLevel=cropType.getMaxWaterLevel();
+        this.maxFertilizerLevel=cropType.getMaxFertilizerLevel();
+        this.waterNeedThreshold=cropType.getWaterNeedThreshold();
+        this.fertilizerNeedThreshold=cropType.getFertilizerNeedThreshold();
         this.health=MAX_HEALTH;
         this.waterLevel=this.maxWaterLevel/2;
         this.fertilizerLevel=this.maxFertilizerLevel/2;
-        this.waterPerDay=10;
-        this.fertilizerPerDay=5;
-        this.waterNeedThreshold=20;
-        this.fertilizerNeedThreshold=10;
         this.daysCurrentStage=0;
         this.isDamaged = false;
         this.basePrice = cropType.getBasePriceCrop();
+        this.dayPerStage=cropType.getDayPerStage();
     }
     public void grow(){
         if(isDead()){
@@ -97,9 +94,6 @@ public abstract class Crop extends Entity {
     public int getHealth() {
         return health;
     }
-    public int getDaysInCurrentStage() {
-        return daysCurrentStage;
-    }
     public CropType getCropType() {
         return cropType;
     }
@@ -114,11 +108,13 @@ public abstract class Crop extends Entity {
     protected void checkHealthStatus() {
         if (waterLevel <= 0) {
             takeDamage(15);
-        } else if (waterLevel < 20) {
-            takeDamage(5);
+        } else if (waterLevel < waterNeedThreshold) {
+            takeDamage(10);
         }
-        if (fertilizerLevel <= 0) {
-            takeDamage(5);
+        if (fertilizerLevel <= fertilizerNeedThreshold) {
+            takeDamage(10);
+        } else if (fertilizerLevel<=0) {
+            takeDamage(15);
         }
     }
     public void takeDamage(int damageAmount) {
@@ -127,21 +123,26 @@ public abstract class Crop extends Entity {
 
         if (isDead()) {
             currentStage = CropStage.DEAD;
-            System.out.println(cropType.getCropName() + " has died!");
+            System.out.println(cropType.getCropName() + " has died");
         }
+    }
+    private void updateDamagedStatus() {
+    	if (health <=0) return;
+    	if(waterLevel >= waterNeedThreshold && 
+    			fertilizerLevel >= fertilizerNeedThreshold && health >=30) {
+    		isDamaged = false;
+    	}
     }
     protected int calculateHarvestValue(){
         if(!isHarvestable()){
-        	throw new IllegalStateException(
-        		cropType.getCropName() + " is not ready to harvest"
-        			);
+        	return 0;
         }
         double value = basePrice;
         if (health<=50&& health>0){
             return (int) Math.round(value);
         }
         return (int) Math.round(value+(health/100.0)*value);
-    }
+   }
     @Override
     public void update() {
         grow();
@@ -190,6 +191,16 @@ public abstract class Crop extends Entity {
             return true;
         }
         return false;
+    }
+    public boolean recoverHealth(int amount) {
+    	if (isDead()) {
+    		System.out.println("Cannot heal a dead crop!");
+    		return false;
+    	}
+    	this.health = Math.min(MAX_HEALTH,this.health+amount);
+    	this.updateDamagedStatus();
+    	System.out.println(cropType.getCropName() +" recovered "+ amount + " % health");
+    	return true;
     }
     @Override
     public String toString() {

@@ -4,7 +4,8 @@ import utility.Point;
 import eventSystem.RandomEventManager;
 import java.util.ArrayList;
 import java.util.List;
-import exceptions.*;
+import eventSystem.GameEvent;
+
 public class Farm {
     private FarmCell[][] grid;
     private int width;
@@ -27,15 +28,21 @@ public class Farm {
     }
     public FarmCell getCell(int x, int y){
         if(!isValidPosition(x,y)){
-            throw new InvalidPositionException("Invalid farm position.");
+            System.out.println("Invalid position");
+            return null;
         }
         return grid[y][x];
     }
     public FarmCell getCell(Point position){
-    	if (position == null) {
-    		throw new InvalidPositionException("Position cannot be null");
-    	}
         return getCell(position.getX(),position.getY());
+    }
+    
+    public Crop getCrop(int x, int y) {
+        FarmCell cell = getCell(x, y);
+        if (cell != null && !cell.isEmpty()) {
+            return cell.getCrop();
+        }
+        return null;
     }
     public int getWidth() {
         return width;
@@ -122,13 +129,17 @@ public class Farm {
             crop.takeDamage(damageAmount);
         }
     }
-    public void advanceDay(RandomEventManager eventManager) {
+    public String advanceDay(RandomEventManager eventManager) {
         System.out.println("Day " + currentDay + " ended.");
         currentDay++;
         System.out.println("\nDay " + currentDay + " begins...");
-        eventManager.triggerRandomEvent();
+        GameEvent event = eventManager.triggerRandomEvent();
+        String eventResult = null;
+        if(event!= null){
+            eventResult=event.triggerEvent(this);
+        }
         updateAllCrops();
-
+        return eventResult;
     }
     public void updateAllCrops() {
         List<Crop> crops = getAllCrops();
@@ -172,4 +183,3 @@ public class Farm {
         );
     }
 }
-
