@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.game.FarmController">
+    <children>
+        <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@../images/Background.png" />
+            </image>
+        </ImageView>
+
+        <Pane fx:id="farmPane" layoutX="50.0" layoutY="50.0" prefHeight="700.0" prefWidth="950.0" />
+
+        <Pane fx:id="uiLayerPane" mouseTransparent="false" pickOnBounds="false" prefHeight="800.0" prefWidth="1200.0">
+            <children>
+
+                <Button fx:id="waterButton" layoutX="300.0" layoutY="430.0" mnemonicParsing="false" onAction="#handleWaterButton"
+                        focusTraversable="false"
+                        style="-fx-background-color: transparent; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-insets: 0; -fx-padding: 0;">
+                    <graphic>
+                        <ImageView fitHeight="245.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/Water_Pod.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="Watering Can" />
+                    </tooltip>
+                </Button>
+
+                <Button fx:id="fertilizerButton" layoutX="420.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleFertilizerButton"
+                        focusTraversable="false"
+                        style="-fx-background-color: transparent; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-insets: 0; -fx-padding: 0;">
+                    <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/Fertilizer_bag.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="Fertilizer" />
+                    </tooltip>
+                </Button>
+                <StackPane layoutX="-253.0" layoutY="-202.0" mouseTransparent="true">
+                    <children>
+                        <ImageView fitHeight="714.0" fitWidth="950.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/Information-Display.png" />
+                            </image>
+                        </ImageView>
+                        <VBox alignment="CENTER" prefHeight="714.0" prefWidth="950.0" spacing="3.0">
+                            <padding>
+                                <Insets bottom="0.0" left="0.0" right="35" top="150.0" />
+                            </padding>
+                            <children>
+                                <Label fx:id="dayLabel" text="Day 1" textFill="#5a3a22">
+                                    <font><Font name="Arial Bold" size="24.0" /></font>
+                                </Label>
+                                <Label fx:id="moneyLabel" text="\$500" textFill="#800000">
+                                    <font><Font name="Arial Bold" size="24.0" /></font>
+                                    <padding><Insets bottom="3.0" top="3.0" /></padding>
+                                </Label>
+                                <HBox alignment="CENTER" spacing="20.0">
+                                    <children>
+                                        <Label fx:id="waterLabel" text="Water: 100" textFill="#0055aa">
+                                            <font><Font name="Arial Bold" size="20.0" /></font>
+                                        </Label>
+                                        <Label fx:id="fertilizerLabel" text="Fer: 50" textFill="#006400">
+                                            <font><Font name="Arial Bold" size="20.0" /></font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </StackPane>
+
+                <Button fx:id="boardButton" layoutX="740.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleBoardClick" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                    <graphic>
+                        <StackPane>
+                            <children>
+                                <ImageView fitHeight="221.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
+                                    <image><Image url="@../images/Notification.png" /></image>
+                                </ImageView>
+                                <Label fx:id="boardLabel" alignment="CENTER" prefHeight="150.0" prefWidth="250.0" text="" textAlignment="CENTER" textFill="#d35400" wrapText="true">
+                                    <font><Font name="System Bold Italic" size="14.0" /></font>
+                                    <padding><Insets top="30.0" /></padding>
+                                </Label>
+                            </children>
+                        </StackPane>
+                    </graphic>
+                </Button>
+            </children>
+        </Pane>
+
+        <Button fx:id="advanceDayButton" layoutX="1020.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleAdvanceDay" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;" text="NEXT DAY" textFill="WHITE">
+            <font><Font name="System Bold" size="16.0" /></font>
+        </Button>
+
+        <VBox alignment="CENTER" layoutX="1045.0" layoutY="100.0" prefHeight="650.0" prefWidth="110.0" spacing="15.0">
+            <children>
+
+                <Button fx:id="storeButton" mnemonicParsing="false" onAction="#handleStoreButton" prefHeight="80.0" prefWidth="80.0"
+                        style="-fx-background-color: transparent; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
+                    <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/Store.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="equipmentButton" mnemonicParsing="false" onAction="#handleEquipmentButton" prefHeight="80.0" prefWidth="80.0"
+                        style="-fx-background-color: transparent; -fx-cursor: hand; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
+                    <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/Inventory.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+
+        <Button fx:id="saveExitButton" layoutX="1020.0" layoutY="724.0" mnemonicParsing="false" onAction="#handleSaveAndExit" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: rgba(200, 0, 0, 0.6); -fx-border-color: white;-fx-border-width: 2px;-fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 0);" text="SAVE &amp; EXIT">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Button>
+
+        <StackPane fx:id="customExitPane" visible="false" style="-fx-background-color: rgba(0, 0, 0, 0.7);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="160.0" prefWidth="380.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 15, 0, 0, 0);">
+                    <children>
+                        <Label text="Please service.save before exiting." style="-fx-font-weight: bold; -fx-font-size: 18px;" />
+                        <HBox alignment="CENTER" spacing="40.0">
+                            <children>
+                                <Button onAction="#handleSaveAndExit" text="YES" prefWidth="90.0" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;" />
+                                <Button onAction="#closeExitPane" text="NO" prefWidth="90.0" style="-fx-background-color: #5bc0de; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </children>
+</AnchorPane>

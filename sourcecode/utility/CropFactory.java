@@ -1,6 +1,6 @@
 package utility;
 
-import core.*;
+import model.crops.*;
 
 public class CropFactory {
     private static int cropIdCounter = 0;
@@ -12,30 +12,6 @@ public class CropFactory {
             case TOMATO -> new Tomato(id, position);
             case CARROT -> new Carrot(id, position);
             case PUMPKIN -> new Pumpkin(id, position);
-        };
-    }
-    public static String getCropInfo(CropType type) {
-        int totalDays = getTotalGrowthDays(type);
-        return String.format(
-                """
-                        %s
-                        Seed Price: $%d
-                        Harvest Value: $%d
-                        Growth Time: %d days
-                       """,
-                type.getCropName(),
-                type.getSeedPrice(),
-                type.getBasePriceCrop(),
-                totalDays
-        );
-    }
-    private static int getTotalGrowthDays(CropType type) {
-        return switch (type) {
-            case WHEAT -> 3;
-            case CORN -> 5;
-            case TOMATO -> 7;
-            case CARROT -> 6;
-            case PUMPKIN -> 9;
         };
     }
 }

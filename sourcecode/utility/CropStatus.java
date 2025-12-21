@@ -1,6 +1,6 @@
 package utility;
 
-import core.Crop;
+import model.crops.Crop;
 
 public class CropStatus {
 	private final String cropName;
@@ -45,10 +45,6 @@ public class CropStatus {
     public int getHealth() { return health; }
     public int getWaterLevel() { return waterLevel; }
     public int getFertilizerLevel() { return fertilizerLevel; }
-    public int getDaysHarvest() { return daysHarvest; }
-    public boolean needsWater() { return needWater; }
-    public boolean needsFertilizer() { return needFertilizer; }
-    public String getStatusMessage() { return statusMessage; }
     @Override
     public String toString() {
         return String.format(

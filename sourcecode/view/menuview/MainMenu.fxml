@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.menu.MainMenuController">
+   <children>
+      <ImageView fx:id="background" fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="false" smooth="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../images/Background.png" />
+         </image>
+      </ImageView>
+
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label style="-fx-font-family: 'Verdana'; -fx-font-weight: bold; -fx-font-size: 48px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0.5, 0, 0); -fx-stroke: #8B4513; -fx-stroke-width: 2px;" text="SMART FARM" textAlignment="CENTER" textFill="GOLD">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#handleStartGame" prefWidth="200.0" style="-fx-background-color: rgba(0, 0, 0, 0.6); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;" text="START GAME" />
+            <Button mnemonicParsing="false" onAction="#handleContinueGame" prefWidth="200.0" style="-fx-background-color: rgba(0, 0, 0, 0.6); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;" text="CONTINUE" />
+            <Button mnemonicParsing="false" onAction="#handleHelp" prefWidth="200.0" style="-fx-background-color: rgba(0, 0, 0, 0.6); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;" text="HELP" />
+            <Button mnemonicParsing="false" onAction="#handleExitRequest" prefWidth="200.0" style="-fx-background-color: rgba(0, 0, 0, 0.6); -fx-border-color: white; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;" text="EXIT" />
+         </children>
+      </VBox>
+
+      <StackPane fx:id="exitPane" style="-fx-background-color: rgba(0, 0, 0, 0.7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="160.0" prefWidth="380.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 15, 0, 0, 0);">
+               <children>
+                  <Label text="Are you sure you want to quit?" textFill="#333333">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="40.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#confirmExit" prefWidth="90.0" style="-fx-background-color: #d9534f; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;" text="YES" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onAction="#cancelExit" prefWidth="90.0" style="-fx-background-color: #5bc0de; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;" text="NO" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+      <StackPane fx:id="helpPane" style="-fx-background-color: rgba(0, 0, 0, 0.7);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 15, 0, 0, 0); -fx-padding: 20;">
+               <children>
+                  <Label text="HOW TO PLAY" textFill="#8B4513">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="The primary aim of this project is to apply Object-Oriented Programming (OOP) principles to design and visualize a dynamic farming system. It demonstrates the practical use of encapsulation, inheritance, and polymorphism to model real-world interactions between crops, the environment, and model.player resources.&#10;&#10;1. Plant seeds to grow crops.&#10;2. Water and fertilize them daily.&#10;3. Harvest and sell for coins!&#10;4. Buy supplies with your profits. &#10;5. Watch out for random events! &#10;Use medicine for damaged crops." textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#closeHelp" prefWidth="120.0" style="-fx-background-color: #5bc0de; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;" text="OK" />
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

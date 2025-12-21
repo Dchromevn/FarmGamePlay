@@ -3,7 +3,7 @@ package utility;
 public enum CropType {
     WHEAT("Wheat",5, 10,50,30,15,10, new int[]{1, 1, 1}),
     CORN("Corn",8,20,80,50,20,15, new int[]{1,2,2}),
-    CARROT("Carrot",15,32,100,6,25,15, new int[]{2,2,2}),
+    CARROT("Carrot",15,32,100,60,25,15, new int[]{2,2,2}),
     TOMATO("Tomato",20,45,120,80,30,20, new int[]{2,3,2}),
     PUMPKIN("Pumpkin",30,80,150,120,40,30, new int[]{3,3,3});
     private final String cropName;
