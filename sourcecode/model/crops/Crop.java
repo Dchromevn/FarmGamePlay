@@ -5,19 +5,19 @@ import utility.*;
 
 public abstract class Crop extends Entity {
     private CropStage currentStage;
-    protected CropType cropType;
+    private CropType cropType;
     protected int waterLevel;
     protected int fertilizerLevel;
     private int health;
     private int daysCurrentStage;
     private boolean isDamaged;
-    protected int maxWaterLevel;
-    protected int maxFertilizerLevel;
+    private int maxWaterLevel;
+    private int maxFertilizerLevel;
     protected final int MAX_HEALTH =100;
-    protected int basePrice;
-    protected int []dayPerStage;
-    protected int waterNeedThreshold;
-    protected int fertilizerNeedThreshold;
+    private int basePrice;
+    private int []dayPerStage;
+    private int waterNeedThreshold;
+    private int fertilizerNeedThreshold;
     public Crop(String id, Point position, CropType cropType){
         super(id, position);
         this.cropType = cropType;
@@ -186,9 +186,6 @@ public abstract class Crop extends Entity {
     }
     public boolean canBeRecycled() {
         if (this.isDead()) {
-            return true;
-        }
-        if (this.health <= 25) {
             return true;
         }
         return false;

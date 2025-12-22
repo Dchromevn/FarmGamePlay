@@ -37,14 +37,6 @@ public class Farm implements Serializable  {
     public FarmCell getCell(Point position){
         return getCell(position.getX(),position.getY());
     }
-    
-    public Crop getCrop(int x, int y) {
-        FarmCell cell = getCell(x, y);
-        if (cell != null && !cell.isEmpty()) {
-            return cell.getCrop();
-        }
-        return null;
-    }
     public int getWidth() {
         return width;
     }
@@ -76,18 +68,6 @@ public class Farm implements Serializable  {
         return crop;
     }
 
-    public List<FarmCell> getEmptyCells(){
-        List<FarmCell> emptyCells =new ArrayList<>();
-        for (int y=0; y<height;y++){
-            for (int x=0;x<width;x++){
-                FarmCell cell= grid[y][x];
-                if (cell.isEmpty()){
-                    emptyCells.add(cell);
-                }
-            }
-        }
-        return emptyCells;
-    }
     public String advanceDay(RandomEventManager eventManager) {
         System.out.println("Day " + currentDay + " ended.");
         currentDay++;
@@ -112,26 +92,6 @@ public class Farm implements Serializable  {
         for (Crop crop : crops) {
             crop.grow();
         }
-    }public void printFarm() {
-        System.out.println("FARM (Day " + currentDay + ")");
-        System.out.println("═".repeat(width * 4 + 1));
-
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                FarmCell cell = grid[y][x];
-
-                if (cell.isEmpty()) {
-                    System.out.print("│  ");
-                } else {
-                    Crop crop = cell.getCrop();
-                    System.out.print("│" + crop.getCurrentStage()+ " ");
-                }
-            }
-            System.out.println("│");
-        }
-
-        System.out.println("═".repeat(width * 4 + 1));
-        System.out.println("Crops: " + getCropCount() + "/" + (width * height));
     }
 
     @Override

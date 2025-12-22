@@ -106,13 +106,4 @@ public class Inventory implements Serializable {
     public String getStatusString() {
         return String.format("[ Money: $%d | Water: %d | Fertilizer: %d |Medicine: %d]", money, water, fertilizer,medicine);
     }
-
-    public void showInventory() {
-        System.out.println("=== Inventory ===");
-        System.out.println(getStatusString());
-        System.out.println("--- Seed ---");
-        seeds.forEach((type, count) -> {
-            if (count > 0) System.out.println("- " + type.getCropName() + ": " + count);
-        });
-    }
 }
