@@ -111,9 +111,6 @@ public class ToolManager {
         this.toolAmount = 0;
         rootPane.setCursor(Cursor.DEFAULT);
 
-
-
-
         updateToolVisuals();
     }
 

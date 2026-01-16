@@ -76,7 +76,7 @@ public class InventoryManager {
         Button closeBtn = new Button("Close");
         closeBtn.setPrefWidth(120);
         closeBtn.setStyle(
-                "-fx-background-color: #d9534f; " + // Red color to differentiate from Store
+                "-fx-background-color: #d9534f; " +
                         "-fx-text-fill: white; " +
                         "-fx-font-weight: bold; " +
                         "-fx-background-radius: 10; " +
@@ -98,7 +98,7 @@ public class InventoryManager {
         VBox card = new VBox(10);
         card.setAlignment(Pos.CENTER);
         card.setPrefSize(140, 160);
-        card.setStyle("-fx-background-color: #FDF5E6; -fx-background-radius: 12; -fx-border-color: #DEB887; -fx-border-width: 2;");
+        card.setStyle("-fx-background-color: #FDF5E6; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #DEB887; -fx-border-width: 2;");
 
         ImageView img = new ImageView(renderer.loadImage(imageName));
         img.setFitWidth(60);

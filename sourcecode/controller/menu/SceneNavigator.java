@@ -3,27 +3,27 @@ package controller.menu;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import controller.game.FarmController;
 import model.core.Farm;
+import model.core.GameState;
 import model.player.Player;
 import controller.game.PlayerController;
 import model.notification.NotificationManager;
-import model.resourceManagement.ResourceManager;
+import model.resourceManagement.Store;
 import utility.NotificationType;
 import service.eventSystem.RandomEventManager;
 import java.io.IOException;
-
+import service.save.GameSaveManager;
+import controller.game.UIManager;
 public class SceneNavigator {
     public static final String MAIN_MENU = "/view/menuview/MainMenu.fxml";
     public static final String GAME_VIEW = "/view/gameview/GameMenu.fxml";
-
-    private static Stage mainStage;
-
+    private static Stage mainStage; //MainMenu window
     public static void setMainStage(Stage stage) {
         mainStage = stage;
     }
-
     public static void loadMainMenu() {
         try {
             FXMLLoader loader = new FXMLLoader(SceneNavigator.class.getResource(MAIN_MENU));
@@ -31,42 +31,53 @@ public class SceneNavigator {
             Stage stage = new Stage();
             stage.setTitle("Smart Farm");
             stage.setScene(new Scene(root));
-            
-            // Cập nhật lại Stage chính của ứng dụng
+            stage.setResizable(false); 
             setMainStage(stage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     public static void loadGameScene(boolean isNewGame) {
         try {
-            Farm farm = new Farm(5, 5);
-            Player player = new Player();
-            NotificationManager nm = new NotificationManager();
-            ResourceManager shop = new ResourceManager();
-            RandomEventManager randomEvent = new RandomEventManager(); // Đổi tên để tránh trùng lặp
-            PlayerController pc = new PlayerController(player, farm, nm, shop, randomEvent);
+        	Farm farm;
+        	Player player;
+        	NotificationManager nm;
+        	RandomEventManager randomEvent;
+        	if (isNewGame) {
+        		farm = new Farm(5,5);
+        		player = new Player();
+        		nm = new NotificationManager();
+        		randomEvent = new RandomEventManager();
+        	} else {
+        		GameSaveManager saveManager = new GameSaveManager();
+        		try {
+        			GameState loadState = saveManager.loadGame(GameSaveManager.DEFAULT_SAVE);
+        			farm = loadState.getFarm();
+        			player = loadState.getPlayer();
+        			nm = loadState.getNotificationManager();
+        			randomEvent = loadState.getEventManager();
+        			nm.addNotification("Welcome back!", NotificationType.SUCCESS, farm.getCurrentDay());
+        		} catch(IOException | ClassNotFoundException e ){
+        			Alert alert = new Alert(Alert.AlertType.ERROR);
+        			alert.setTitle("Load Failed");
+        			alert.setHeaderText("Cannot continue game");
+                    alert.setContentText("Save file not found or corrupted.");
+                    alert.showAndWait();
+                    return ;
+        		}
+        	}
+        	Store shop = new Store();
+        	PlayerController pc = new PlayerController(player, farm, nm, shop, randomEvent,null);
 
             FXMLLoader loader = new FXMLLoader(SceneNavigator.class.getResource(GAME_VIEW));
             Parent root = loader.load();
 
             FarmController controller = loader.getController();
             if (controller != null) {
-                if (!isNewGame) {
-                    pc.loadGameCommand("smartfarm_save");
-                    farm = pc.getFarm();
-                    player = pc.getPlayer();
-                    nm = pc.getNotificationManager();
-
-                    nm.addNotification("Welcome back!", NotificationType.SUCCESS, farm.getCurrentDay());
-                
-                }
-                controller.initialize(player,farm,nm,pc);
+                controller.initialize(player,farm,nm,pc,randomEvent);
                 controller.updateGameUI(); 
             }
-
             Stage gameStage = new Stage();
             gameStage.setTitle("Smart Farm - Game Play");
             gameStage.setScene(new Scene(root));
@@ -76,16 +87,16 @@ public class SceneNavigator {
                     controller.confirmExitOnClose(windowEvent);
                 }
             });
-
             gameStage.show();
-
             if (mainStage != null) {
                 mainStage.close();
             }
-
         } catch (IOException e) {
+        	Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Failed to load game screen.");
+            alert.showAndWait();
             e.printStackTrace();
-            System.out.println("Error loading Game Scene: " + e.getMessage());
         }
     }
 }

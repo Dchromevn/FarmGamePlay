@@ -1,6 +1,6 @@
 package model.exceptions;
 
-public class NotEnoughResourceException extends RuntimeException {
+public class NotEnoughResourceException extends Exception {
 
 	public NotEnoughResourceException(String message) {
 		super(message);

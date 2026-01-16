@@ -16,8 +16,5 @@ public abstract class Entity implements Serializable {
     public Point getPosition(){
         return position;
     }
-    public void setPosition(Point position){
-        this.position=position;
-    }
     public abstract void update();
 }

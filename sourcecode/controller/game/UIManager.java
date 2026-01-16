@@ -99,7 +99,7 @@ public class UIManager {
         Button closeBtn = new Button("Close");
         closeBtn.setPrefWidth(200);
         // BUTTON: Font Arial
-        closeBtn.setStyle("-fx-background-color: #8B4513; -fx-text-fill: white; -fx-font-family: 'Arial'; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10; -fx-cursor: hand;");
+        closeBtn.setStyle("-fx-background-color: #d9534f; -fx-text-fill: white; -fx-font-family: 'Arial'; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10; -fx-cursor: hand;");
         closeBtn.setOnAction(e -> rootPane.getChildren().remove(overlay));
 
         boardBox.getChildren().addAll(title, listView, closeBtn);
@@ -109,12 +109,61 @@ public class UIManager {
         ScaleTransition st = new ScaleTransition(Duration.millis(200), boardBox);
         st.setFromX(0.8); st.setFromY(0.8); st.setToX(1.0); st.setToY(1.0); st.play();
     }
-
     public void showAlert(String title, String content, Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
+        if (rootPane == null) {
+            return;
+        }
+        
+        // Overlay
+        StackPane overlay = new StackPane();
+        overlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.7);");
+        overlay.setPrefSize(rootPane.getWidth(), rootPane.getHeight());
+        
+        // Main container - same style as other popups
+        VBox alertBox = new VBox(20);
+        alertBox.setAlignment(Pos.CENTER);
+        alertBox.setMaxSize(400, 200);
+        alertBox.setPadding(new Insets(30));
+        alertBox.setStyle(
+            "-fx-background-color: white; " +
+            "-fx-background-radius: 20; " +
+            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 15, 0, 0, 0);"
+        );
+        // Title
+        Label titleLabel = new Label(title);
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        titleLabel.setTextFill(Color.web("#5D4037"));
+        // Content
+        Label contentLabel = new Label(content);
+        contentLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 16));
+        contentLabel.setTextFill(Color.web("#333333"));
+        contentLabel.setWrapText(true);
+        contentLabel.setMaxWidth(380);
+        contentLabel.setAlignment(Pos.CENTER);
+        // OK Button 
+        Button okBtn = new Button("OK");
+        okBtn.setPrefWidth(120);
+        okBtn.setPrefHeight(40);
+        okBtn.setStyle("-fx-background-color: #d9534f; " +"-fx-text-fill: white; " +"-fx-font-family: 'Arial'; " +"-fx-font-weight: bold; " +"-fx-font-size: 14px; " + "-fx-background-radius: 10; " + "-fx-cursor: hand;");
+        okBtn.setOnAction(e -> rootPane.getChildren().remove(overlay));
+        alertBox.getChildren().addAll(titleLabel, contentLabel, okBtn);
+        overlay.getChildren().add(alertBox);
+        rootPane.getChildren().add(overlay);
+        
+        ScaleTransition st = new ScaleTransition(Duration.millis(200), alertBox);
+        st.setFromX(0.7); st.setFromY(0.7);
+        st.setToX(1.0); st.setToY(1.0);
+        st.play();
     }
+
+    public void addButtonAnimation(Button btn) {
+        if (btn == null) return;
+        btn.setOnMouseEntered(e -> {
+            ScaleTransition st = new ScaleTransition(Duration.millis(100), btn);st.setToX(1.1); st.setToY(1.1); st.play();
+        });
+        btn.setOnMouseExited(e -> {
+            ScaleTransition st = new ScaleTransition(Duration.millis(100), btn);st.setToX(1.0); st.setToY(1.0); st.play();
+        });
+    }
+
 }

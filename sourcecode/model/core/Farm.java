@@ -28,13 +28,13 @@ public class Farm implements Serializable  {
             }
         }
     }
-    public FarmCell getCell(int x, int y){
+    public FarmCell getCell(int x, int y)throws InvalidPositionException{
         if(!isValidPosition(x,y)){
         	throw new InvalidPositionException("Invalid position: "+x+ ", "+y);
         }
         return grid[y][x];
     }
-    public FarmCell getCell(Point position){
+    public FarmCell getCell(Point position) throws InvalidPositionException{
         return getCell(position.getX(),position.getY());
     }
     public int getWidth() {

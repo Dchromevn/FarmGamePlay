@@ -60,7 +60,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label text="The primary aim of this project is to apply Object-Oriented Programming (OOP) principles to design and visualize a dynamic farming system. It demonstrates the practical use of encapsulation, inheritance, and polymorphism to model real-world interactions between crops, the environment, and model.player resources.&#10;&#10;1. Plant seeds to grow crops.&#10;2. Water and fertilize them daily.&#10;3. Harvest and sell for coins!&#10;4. Buy supplies with your profits. &#10;5. Watch out for random events! &#10;Use medicine for damaged crops." textAlignment="CENTER" wrapText="true">
+                  <Label text="The primary aim of this project is to apply Object-Oriented Programming (OOP) principles to design and visualize a dynamic farming system. It demonstrates the practical use of encapsulation, inheritance, and polymorphism to model real-world interactions between crops, the environment, and player resources.&#10;&#10;1. Plant seeds to grow crops.&#10;2. Water and fertilize them daily.&#10;3. Harvest and sell for coins.&#10;4. Buy supplies with your profits. &#10;5. Watch out for random events! &#10;Use medicine for damaged crops." textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>

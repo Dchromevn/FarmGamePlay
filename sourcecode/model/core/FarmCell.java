@@ -12,7 +12,7 @@ public class FarmCell implements Serializable {
         this.position=position;
         this.crop=null;
     }
-    public void plantCrop(Crop crop){
+    public void plantCrop(Crop crop) throws CellOccupiedException{
         if(crop==null){
         	throw new IllegalArgumentException("Crop cannot be null");
         }

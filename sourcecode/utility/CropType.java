@@ -1,11 +1,11 @@
 package utility;
 
 public enum CropType {
-    WHEAT("Wheat",5, 10,50,30,15,10, new int[]{1, 1, 1}),
-    CORN("Corn",8,20,80,50,20,15, new int[]{1,2,2}),
-    CARROT("Carrot",15,32,100,60,25,15, new int[]{2,2,2}),
-    TOMATO("Tomato",20,45,120,80,30,20, new int[]{2,3,2}),
-    PUMPKIN("Pumpkin",30,80,150,120,40,30, new int[]{3,3,3});
+    WHEAT("Wheat",5, 10,50,30,15,10, new int[]{1, 1, 1},4,2),
+    CORN("Corn",8,20,80,50,20,15, new int[]{1,2,2},5,3),
+    CARROT("Carrot",15,32,100,60,25,15, new int[]{2,2,2},6,3),
+    TOMATO("Tomato",20,45,120,80,30,20, new int[]{2,3,2},8,4),
+    PUMPKIN("Pumpkin",30,80,150,120,40,30, new int[]{3,3,3},10,6);
     private final String cropName;
     private final int seedPrice;
     private final int basePriceCrop;
@@ -13,12 +13,13 @@ public enum CropType {
     private final int maxFertilizerLevel;
     private final int waterNeedThreshold;
     private final int fertilizerNeedThreshold;
+    private final int waterConsumption;
+    private final int fertilizerConsumption;
     private final int []dayPerStage;
 
     CropType(String cropName,int seedPrice,int basePriceCrop,int maxWaterLevel,
-             int maxFertilizerLevel,int waterNeedThreshold,int fertilizerNeedThreshold,int []dayPerStage
-
-    ){
+             int maxFertilizerLevel,int waterNeedThreshold,int fertilizerNeedThreshold,int []dayPerStage,
+             int waterConsumption, int fertilizerConsumption){
         this.cropName=cropName;
         this.seedPrice=seedPrice;
         this.basePriceCrop=basePriceCrop;
@@ -27,6 +28,8 @@ public enum CropType {
         this.waterNeedThreshold=waterNeedThreshold;
         this.fertilizerNeedThreshold=fertilizerNeedThreshold;
         this.dayPerStage=dayPerStage;
+        this.waterConsumption=waterConsumption;
+        this.fertilizerConsumption=fertilizerConsumption;
     }
     public String getCropName(){
         return cropName;
@@ -42,4 +45,6 @@ public enum CropType {
     public int getWaterNeedThreshold(){return waterNeedThreshold;}
     public int getFertilizerNeedThreshold(){return fertilizerNeedThreshold;}
     public int[] getDayPerStage() { return dayPerStage; }
+    public int getWaterConsumption() {return waterConsumption;}
+    public int getFertilizerConsumption() {return fertilizerConsumption;}
 }

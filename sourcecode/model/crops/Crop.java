@@ -3,7 +3,7 @@ package model.crops;
 import model.core.Entity;
 import utility.*;
 
-public abstract class Crop extends Entity {
+public class Crop extends Entity {
     private CropStage currentStage;
     private CropType cropType;
     protected int waterLevel;
@@ -98,8 +98,19 @@ public abstract class Crop extends Entity {
     public CropType getCropType() {
         return cropType;
     }
-    protected abstract void consumeResource();
-    public abstract int harvest();
+    protected void consumeResource() {
+    	waterLevel = Math.max(0, waterLevel - cropType.getWaterConsumption());
+    	fertilizerLevel = Math.max(0, fertilizerLevel - cropType.getFertilizerConsumption());
+    }
+    public int harvest() {
+    	if (!isHarvestable()) {
+    		System.out.println(cropType.getCropName() + " is not ready for harvesting.");
+    		return 0;
+    	}
+    	int value = calculateHarvestValue();
+    	System.out.println("Harvested "+cropType.getCropName()+ ": $"+value);
+    	return value;
+    }
     protected boolean hasEnoughResources() {
         return waterLevel > 0;
     }
@@ -200,6 +211,12 @@ public abstract class Crop extends Entity {
     	System.out.println(cropType.getCropName() +" recovered "+ amount + " % health");
     	return true;
     }
+     public boolean isWaterFull() {
+    	 return this.waterLevel >= this.maxWaterLevel;
+     }
+     public boolean isFertilizerFull() {
+    	 return this.fertilizerLevel >= this.maxFertilizerLevel;
+     }
     @Override
     public String toString() {
         return String.format(

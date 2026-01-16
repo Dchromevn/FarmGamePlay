@@ -31,7 +31,7 @@ public class Inventory implements Serializable {
         this.money += amount;
     }
 
-    public void spendMoney(int amount) {
+    public void spendMoney(int amount) throws NotEnoughResourceException {
         validatePositive(amount, "Money: ");
         if (this.money < amount) {
             throw new NotEnoughResourceException("Not enough money. Required: " + amount + ", available: " + money);
@@ -45,7 +45,7 @@ public class Inventory implements Serializable {
         this.water += amount;
     }
 
-    public void useWater(int amount) {
+    public void useWater(int amount) throws NotEnoughResourceException{
         validatePositive(amount, "Water");
         if (this.water < amount) {
             throw new NotEnoughResourceException("Not enough water.");
@@ -59,7 +59,7 @@ public class Inventory implements Serializable {
         this.fertilizer += amount;
     }
 
-    public void useFertilizer(int amount) {
+    public void useFertilizer(int amount) throws NotEnoughResourceException {
         validatePositive(amount, "Fertilizer: ");
         if (this.fertilizer < amount) {
             throw new NotEnoughResourceException("Not enough fertilizer.");
@@ -75,7 +75,7 @@ public class Inventory implements Serializable {
         seeds.put(type, getSeedCount(type) + amount);
     }
 
-    public void removeSeed(CropType type, int amount) {
+    public void removeSeed(CropType type, int amount) throws NotEnoughResourceException {
         validatePositive(amount, "Seed amount: ");
         int current = getSeedCount(type);
         if (current < amount) {
@@ -90,7 +90,7 @@ public class Inventory implements Serializable {
     	validatePositive(amount, "Medicine: ");
     	this.medicine += amount;
     }
-    public void useMedicine(int amount) {
+    public void useMedicine(int amount) throws NotEnoughResourceException {
     	validatePositive(amount, "Medicine: ");
     	if (this.medicine < amount) {
     		throw new NotEnoughResourceException("Not enough medicine!");

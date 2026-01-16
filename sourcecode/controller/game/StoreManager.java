@@ -11,7 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 import model.player.Player;
-
+import model.resourceManagement.*;
 public class StoreManager {
     private AnchorPane rootPane;
     private PlayerController playerController;
@@ -85,7 +85,7 @@ public class StoreManager {
         for (utility.CropType type : utility.CropType.values()) {
             String typeName = type.toString().substring(0, 1).toUpperCase() + type.toString().substring(1).toLowerCase();
             VBox item = createShopItem(typeName, type.getSeedPrice(), typeName + "_Bag", () -> {
-                playerController.buySeed(type, 1);
+                playerController.buyItem(new SeedItem(type), 1);
                 storeMoneyLabel.setText("$" + player.getInventory().getMoney());
                 if(onPurchaseCallback != null) onPurchaseCallback.run();
             });
@@ -93,16 +93,16 @@ public class StoreManager {
         }
 
         // 2. Other Items (Phân bón, Nước, Thuốc)
-        grid.add(createShopItem("Fertilizer", 3, "Fertilizer_Bag_Sell", () -> {
-            playerController.buyFertilizer(1); storeMoneyLabel.setText("$" + player.getInventory().getMoney()); if(onPurchaseCallback != null) onPurchaseCallback.run();
+        grid.add(createShopItem("Fertilizer(25 units)", 3, "Fertilizer_Bag_Sell", () -> {
+            playerController.buyItem(new FertilizerItem(),1); storeMoneyLabel.setText("$" + player.getInventory().getMoney()); if(onPurchaseCallback != null) onPurchaseCallback.run();
         }), col, row); col++; if (col > 2) { col = 0; row++; }
 
-        grid.add(createShopItem("Water", 2, "Water", () -> {
-            playerController.buyWater(1); storeMoneyLabel.setText("$" + player.getInventory().getMoney()); if(onPurchaseCallback != null) onPurchaseCallback.run();
+        grid.add(createShopItem("Water(25 units)", 2, "Water", () -> {
+            playerController.buyItem(new WaterItem(),1); storeMoneyLabel.setText("$" + player.getInventory().getMoney()); if(onPurchaseCallback != null) onPurchaseCallback.run();
         }), col, row); col++; if (col > 2) { col = 0; row++; }
 
         grid.add(createShopItem("Medicine", 50, "Medicine", () -> {
-            playerController.buyMedicine(1); storeMoneyLabel.setText("$" + player.getInventory().getMoney()); if(onPurchaseCallback != null) onPurchaseCallback.run();
+            playerController.buyItem(new MedicineItem(),1); storeMoneyLabel.setText("$" + player.getInventory().getMoney()); if(onPurchaseCallback != null) onPurchaseCallback.run();
         }), col, row);
 
         // --- NÚT CLOSE ---
@@ -110,7 +110,7 @@ public class StoreManager {
         Button closeBtn = new Button("Close");
         closeBtn.setPrefWidth(120);
         closeBtn.setStyle(
-                "-fx-background-color: #5bc0de; " +
+                "-fx-background-color: #d9534f; " +
                         "-fx-text-fill: white; " +
                         "-fx-font-weight: bold; " +
                         "-fx-background-radius: 10; " +

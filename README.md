@@ -11,14 +11,20 @@ The project is primarily implemented in **Java**, focusing on designing a flexib
 
 | No. | Name               | Student ID  | Cohort |
 |:---:|-------------------|------------|:---:|
-| 1   | Võ Chiến Huy         | 20215208  | K66 |
+| 1   | Vũ Đức Duy         | 202416686  | K69 |
 | 2   | Vũ Đỗ Minh Thảo    | 202416752  | K69 |
 | 3   | Nguyễn Minh Dũng   | 202416682  | K69 |
-| 4   | Vũ Đức Duy       | 202416686   | K69 |
+| 4   | Võ Chiến Huy       | 20215208   | K66 |
 
 ## Technologies
 
 - **Language:** Java
 - **Development Tools:** IntelliJ IDEA / Eclipse
-- **Libraries/Frameworks:** (if any, can add here)
+- **Libraries/Frameworks:**
+    + [Flaticon](https://www.flaticon.com)
+    + [Youtube](https://www.youtube.com/watch?v=om59cwR7psI&list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq)
+    + Google Nano Banana (for images)
 
+## Demo
+
+Click this link [Demo OOP Project](https://www.youtube.com/watch?v=FbP_Bd62Jt0&)

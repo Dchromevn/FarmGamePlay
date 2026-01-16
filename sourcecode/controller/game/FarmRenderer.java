@@ -1,6 +1,7 @@
 package controller.game;
 
 import model.crops.Crop;
+import model.exceptions.InvalidPositionException;
 import model.core.Farm;
 import model.core.FarmCell;
 import javafx.animation.Animation;
@@ -49,23 +50,28 @@ public class FarmRenderer {
         farmPane.getChildren().clear();
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
-                FarmCell cell = farm.getCell(col, row);
-                StackPane tile = createIsometricTile(row, col, cell, onTileClick);
-
-                double x = (col - row) * (TILE_WIDTH / 2) + BASE_OFFSET_X;
-                double y = (col + row) * (TILE_HEIGHT / 2) + BASE_OFFSET_Y;
-
-                tile.setLayoutX(x);
-                tile.setLayoutY(y);
-
-                if (selectedCell != null && selectedCell.getX() == col && selectedCell.getY() == row) {
-                    if (tile.getChildren().size() > 1)
-                        tile.getChildren().get(1).setEffect(new DropShadow(20, Color.YELLOW));
-                }
-
-                farmPane.getChildren().add(tile);
+            	try {
+	            	FarmCell cell = farm.getCell(col, row);
+	                StackPane tile = createIsometricTile(row, col, cell, onTileClick);
+	
+	                double x = (col - row) * (TILE_WIDTH / 2) + BASE_OFFSET_X;
+	                double y = (col + row) * (TILE_HEIGHT / 2) + BASE_OFFSET_Y;
+	
+	                tile.setLayoutX(x);
+	                tile.setLayoutY(y);
+	
+	                if (selectedCell != null && selectedCell.getX() == col && selectedCell.getY() == row) {
+	                    if (tile.getChildren().size() > 1) {
+	                        tile.getChildren().get(1).setEffect(new DropShadow(20, Color.YELLOW));
+	                    }
+	                }
+            	
+            	farmPane.getChildren().add(tile);
+            	} catch (InvalidPositionException e) {
+            	System.err.println("Rendering error at [" + col + "," + row + "]: " + e.getMessage());
+            	}
             }
-        }
+     	}
     }
 
     private StackPane createIsometricTile(int row, int col, FarmCell cell, TileClickHandler onTileClick) {

@@ -3,13 +3,18 @@ import java.io.*;
 import model.core.GameState;
 public class GameSaveManager {
     private static final String SAVE_FOLDER = "sourcecode/service/save/saves/";
+    public static final String DEFAULT_SAVE = "smartfarm_save";  
     private static final String FILE_EXTENSION = ".dat";
 
     public GameSaveManager() {
-        File directory = new File(SAVE_FOLDER);
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
+    	File directory = new File(SAVE_FOLDER);
+    	if(!directory.exists()) {
+    		directory.mkdirs();
+    	}
+    }
+    public boolean saveExists(String filename) {
+    	File file = new File(SAVE_FOLDER +filename+FILE_EXTENSION);
+    	return file.exists();
     }
     public void saveGame(GameState state, String filename) throws IOException {
         String fullPath = SAVE_FOLDER + filename + FILE_EXTENSION;
